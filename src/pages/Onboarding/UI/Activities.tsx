@@ -6,6 +6,8 @@ import { MultipleSelectLayout } from './MultipleSelectLayout';
 import { LayoutButton } from '../LayoutButton';
 import { useValidation } from '../../../hooks/useOboardingValidation';
 import { Error } from '../../../components/Error';
+import { Animate } from '../Animate';
+import { StepLabel } from './StepLabel';
 
 export const Activities = () => {
   /* @ts-ignore */
@@ -14,6 +16,9 @@ export const Activities = () => {
 
   return (
     <>
+      <Animate key='activity'>
+        <StepLabel />
+
    <Box>  
         {
           errors.selectedActivities && (
@@ -28,6 +33,8 @@ export const Activities = () => {
         setSelectedItems={setSelectedActivities}
       />
    </Box>
+
+      </Animate>
       <LayoutButton validate={validate} fieldsToLookUp={['selectedActivities']} />
     </>
   )

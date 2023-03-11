@@ -4,8 +4,10 @@ import { Error } from '../../../components/Error'
 import { useOnboardingContext } from '../../../context/onboardingContext'
 import { useValidation } from '../../../hooks/useOboardingValidation'
 import { propertyTypeArray } from '../../../utils/config'
+import { Animate } from '../Animate'
 import { LayoutButton } from '../LayoutButton'
 import { MultipleSelectLayout } from './MultipleSelectLayout'
+import { StepLabel } from './StepLabel'
 
 export const Property = () => {
   /* @ts-ignore */
@@ -14,6 +16,9 @@ export const Property = () => {
 
   return (
     <>
+      <Animate key='property'>
+        <StepLabel />
+
     <Box>
         {
           errors['selectedPropertyType'] && (
@@ -28,6 +33,8 @@ export const Property = () => {
         setSelectedItems={setSelectedPropertyType}
       />
     </Box>
+      </Animate>
+
       <LayoutButton validate={validate} fieldsToLookUp={['selectedPropertyType']} />
     </>
   )

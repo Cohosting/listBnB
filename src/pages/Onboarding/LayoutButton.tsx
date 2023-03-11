@@ -11,7 +11,6 @@ export const LayoutButton: FC<any> = ({ validate, fieldsToLookUp }) => {
     const handleStepChange = () => {
         let shouldReturn = false
         const errors = validate();
-        console.log({ errors })
         fieldsToLookUp.forEach((el: any) => {
             if (errors[el]) shouldReturn = true
         });

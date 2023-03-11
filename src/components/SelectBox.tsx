@@ -29,13 +29,13 @@ const CheckedBox:FC<any> = ({ isSelected, variant = 'float' }) => {
   )
 }
 
-export const SelectBox:FC<any> = ({label, icon, value, onSelect, variant}) => {
+export const SelectBox: FC<any> = ({ label, icon, value, onSelect, variant, key }) => {
   let isSelected =  Array.isArray(value) ?  value.includes(label) : label ===  value;
   let selectBoxContainerStyle = {
    bg:  'white',
    borderRadius: '8px',
-   boxShadow: '20px 20px 80px rgba(118, 161, 201, 0.2)',
-   filter: 'drop-shadow(0px 2px 1px rgba(111, 152, 214, 0.1))',
+/*    boxShadow: '20px 20px 80px rgba(118, 161, 201, 0.2)',
+ */   filter: 'drop-shadow(0px 2px 1px rgba(111, 152, 214, 0.1))',
    cursor:'pointer',
     ...(isSelected  && {  bg: '#FFF8F7', border: '1px solid #FE7146'})
   };
@@ -48,7 +48,7 @@ export const SelectBox:FC<any> = ({label, icon, value, onSelect, variant}) => {
   }
 
   return (
-    <Flex     onClick={() => onSelect(label)}  sx={{...selectBoxContainerStyle,...(variant === 'side'  ? variantStyle: {flexDir: 'column'})}} p={'27px 20px'} pos={'relative'}  >
+    <Flex key={key} onClick={() => onSelect(label)} sx={{ ...selectBoxContainerStyle, ...(variant === 'side' ? variantStyle : { flexDir: 'column' }) }} p={'27px 20px'} pos={'relative'}  >
       {
         icon && (
           <Box mb={'16px'} color={'#494949'}>

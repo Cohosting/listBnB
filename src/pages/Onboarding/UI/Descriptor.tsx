@@ -6,6 +6,8 @@ import { MultipleSelectLayout } from './MultipleSelectLayout'
 import { useValidation } from '../../../hooks/useOboardingValidation';
 import { LayoutButton } from '../LayoutButton';
 import { Error } from '../../../components/Error';
+import { Animate } from '../Animate';
+import { StepLabel } from './StepLabel';
 
 export const Descriptor = () => {
   // @ts-ignore
@@ -14,6 +16,9 @@ export const Descriptor = () => {
 
   return (
     <>
+      <Animate key='descriptor'>
+        <StepLabel />
+
     <Box>
         {
           errors['selectedDescriptor'] && (
@@ -28,6 +33,8 @@ export const Descriptor = () => {
         setSelectedItems={setSelectedDescriptor}
       />
     </Box>
+      </Animate>
+
       <LayoutButton validate={validate} fieldsToLookUp={['selectedDescriptor']} />
     </>
 

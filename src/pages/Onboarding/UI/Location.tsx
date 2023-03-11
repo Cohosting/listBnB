@@ -6,6 +6,9 @@ import { LocationSuggestion } from '../../../components/LocationSuggestion'
 import { useOnboardingContext } from '../../../context/onboardingContext'
 import { useValidation } from '../../../hooks/useOboardingValidation'
 import { LayoutButton } from '../LayoutButton'
+import { motion, AnimatePresence } from "framer-motion";
+import { Animate } from '../Animate'
+import { StepLabel } from './StepLabel'
 
 export const Location = () => {
   // @ts-ignore
@@ -37,6 +40,8 @@ export const Location = () => {
   let fieldsToLookUp = ['location.coordinates', 'location.locationText', 'counts.bathrooms', 'counts.bedrooms', 'counts.occupency']
   return (
     <>
+      <Animate key='location'>
+        <StepLabel />
       <Box>
         {errors['location.coordinates'] && (
           <Error my={"15px"}>
@@ -65,6 +70,7 @@ export const Location = () => {
           }} label={'occupency'} count={occupency} />
         </Flex>
       </Box>
+      </Animate>
       <LayoutButton validate={validate} fieldsToLookUp={fieldsToLookUp} />
     </>
 

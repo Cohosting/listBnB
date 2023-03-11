@@ -21,6 +21,7 @@ export const MultipleSelectLayout:FC<any> = ({items,selectedItems, setSelectedIt
       {
             items.map((el: any) => (
               <SelectBox
+                key={`key--${el.label}`}
                 label={el.label}
                 icon={el.icon}
                 value={selectedItems}  

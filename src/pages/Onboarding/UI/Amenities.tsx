@@ -10,6 +10,8 @@ import { useAuthContext } from '../../../context/authContext';
 import { useValidation } from '../../../hooks/useOboardingValidation';
 import { LayoutButton } from '../LayoutButton';
 import { Error } from '../../../components/Error';
+import { Animate } from '../Animate';
+import { StepLabel } from './StepLabel';
 
 
 export const Amenities = () => {
@@ -36,6 +38,9 @@ export const Amenities = () => {
   }
   return (
     <>
+      <Animate key='property'>
+        <StepLabel />
+
     <Box>
         {errors.selectedAmentities && (
           <Error my={"15px"}>
@@ -83,11 +88,12 @@ export const Amenities = () => {
         </VStack>
 
         <Flex alignItems={'center'} justifyContent={'center'} pb={'40px'} >
-          <Button onClick={handleGenerate} width={'260px'} height={'55px'}  >Generate</Button>
+              <Button onClick={handleGenerate} width={'260px'} height={'55px'} >Generate</Button>
         </Flex>
 
       </ActionBox>
     </Box>
+      </Animate>
       <LayoutButton validate={validate} fieldsToLookUp={['selectedAmentities']} />
     </>
   )

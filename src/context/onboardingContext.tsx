@@ -1,5 +1,5 @@
 import { useDisclosure } from "@chakra-ui/react";
-import { createContext, FC, useContext, useState } from "react";
+import { createContext, FC, useContext, useMemo, useState } from "react";
 
 
 const contextObject = createContext(null);
@@ -27,6 +27,7 @@ const OnboardingContextProvider:FC<any>  =  ({children , currentStep,setCurrentS
         coordinates: [],
         locationText: ''
     });
+
 
     return (
         /* @ts-ignore */
