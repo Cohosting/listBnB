@@ -6,18 +6,22 @@ import { auth } from '../lib/firebase';
 const context = createContext<any>(null);
 
 const AuthContextComponent:FC<any> = ({children}) => {
-  const [currentUser, setCurrentUser] = useState<any>(null);
-
+  const [currentUser, setCurrentUser] = useState<any>(undefined);
+  const [isUserPersist, setIsUserPersist] = useState(false)
 
   useEffect(() => {
    const unsubscribe = onAuthStateChanged(auth, async (user) => {
         if (user) {
+          setIsUserPersist(true);
           const userObject = await getOrCreateUser(user);
-          setCurrentUser(userObject)
+          setCurrentUser(userObject);
           // ..
         } else {
           // User is signed out
-          console.log("user is logged out")
+          console.log("user is logged out");
+          setCurrentUser(null);
+          setIsUserPersist(false);
+
         }
     });
     return ()  => {
@@ -27,7 +31,9 @@ const AuthContextComponent:FC<any> = ({children}) => {
   return (
     <context.Provider value={{
         currentUser,
-        setCurrentUser  
+      setCurrentUser,
+      isUserPersist,
+      setIsUserPersist
     }}>
         {children}
     </context.Provider>

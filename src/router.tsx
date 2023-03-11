@@ -1,5 +1,6 @@
 import React from 'react';
 import { createBrowserRouter }  from 'react-router-dom';
+import { ProtectedRoute } from './components/ProtectedRoutes';
 import { Login } from './pages/Auth/Login';
 import { Signup } from './pages/Auth/Signup';
 import { Dashboard } from './pages/dashboard';
@@ -20,19 +21,27 @@ const router = createBrowserRouter([
 },
 {
     path: '/onboarding',
-    element: <Onboarding />
+    element: (<ProtectedRoute>
+        <Onboarding />
+    </ProtectedRoute>)
 },
 {
     path: '/results/:id',
-    element: <Results />
+    element: (<ProtectedRoute>
+        <Results />
+    </ProtectedRoute>)
 },
 {
     path: '/dashboard',
-    element: <Dashboard />
+    element: (<ProtectedRoute>
+        <Dashboard />
+    </ProtectedRoute>)
 },
 {
     path: '/',
-    element: <Homepage />
+    element: (<ProtectedRoute>
+        <Homepage />
+    </ProtectedRoute>)
 },
 {
     path: '/privacy-policy',
