@@ -26,7 +26,7 @@ const OnboardingContextProvider:FC<any>  =  ({children , currentStep,setCurrentS
     const [location, setLocation] = useState({
         coordinates: [],
         locationText: ''
-    })
+    });
 
     return (
         /* @ts-ignore */

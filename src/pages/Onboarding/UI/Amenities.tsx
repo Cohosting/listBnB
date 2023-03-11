@@ -7,18 +7,25 @@ import { useOnboardingContext } from '../../../context/onboardingContext';
 import { MultipleSelectLayout } from './MultipleSelectLayout';
 import { amenitiesArray } from '../../../utils/config';
 import { useAuthContext } from '../../../context/authContext';
+import { useValidation } from '../../../hooks/useOboardingValidation';
+import { LayoutButton } from '../LayoutButton';
+import { Error } from '../../../components/Error';
 
 
 export const Amenities = () => {
   /* @ts-ignore */
   const { tone, setTone, isActionBoxOpen, onActionBoxToggle, selectedAmentities, setSelectedAmenities, setCurrentStep } = useOnboardingContext();
   const { currentUser } = useAuthContext()
+  const { validate, errors } = useValidation({ selectedAmentities, tone })
 
   const handleSelect = (val: string) => {
     setTone(val)
   };
 
   const handleGenerate = () => {
+    const err = validate();
+    if (err.tone) return
+
     if (!currentUser) {
       onActionBoxToggle();
       setCurrentStep('auth')
@@ -28,14 +35,18 @@ export const Amenities = () => {
 
   }
   return (
+    <>
     <Box>
+        {errors.selectedAmentities && (
+          <Error my={"15px"}>
+            <Text>Please select at least one!</Text>
+          </Error>
+        )}
       <MultipleSelectLayout
         items={amenitiesArray}
         selectedItems={selectedAmentities}
         setSelectedItems={setSelectedAmenities}
       />
-
-
 
       {/* ActionBox */}
       <ActionBox isOpen={isActionBoxOpen} onToggle={onActionBoxToggle}>
@@ -62,12 +73,22 @@ export const Amenities = () => {
             value={tone}
             onSelect={handleSelect}
           />
+            {
+              errors.tone && (
+                <Error mb={'15px'}>
+                  <Text>Please select tone to proceed!</Text>
+                </Error>
+              )
+            }
         </VStack>
+
         <Flex alignItems={'center'} justifyContent={'center'} pb={'40px'} >
           <Button onClick={handleGenerate} width={'260px'} height={'55px'}  >Generate</Button>
         </Flex>
 
       </ActionBox>
     </Box>
+      <LayoutButton validate={validate} fieldsToLookUp={['selectedAmentities']} />
+    </>
   )
 }

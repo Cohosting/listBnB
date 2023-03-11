@@ -5,33 +5,22 @@ import  { MdKeyboardArrowLeft } from 'react-icons/md';
 import  { AiOutlineClose } from 'react-icons/ai';
 import { ProgressBar } from '../../components/ProgressBar';
 import { useOnboardingContext } from '../../context/onboardingContext';
+import { Error } from '../../components/Error';
+import { LayoutButton } from './LayoutButton';
 
-const CONFIG_VAR = ['locations','descriptor','property','activities', 'amenities']
+export const CONFIG_VAR = ['locations', 'descriptor', 'property', 'activities', 'amenities']
 
 export const OnboardingLayout:FC<any> = ({children , currentStep, onStepChange}) => {
     // @ts-ignore
-    const {onActionBoxToggle, allProgress, setAllProgress} = useOnboardingContext()
+  const { allProgress } = useOnboardingContext()
     let  styleTopIcon  = {
         border: '1px solid #E3E6EE',
         padding:  '5px',
         borderRadius: '8px'
     };
 
-    const handleStepChange = ()  => {
-        const idx = CONFIG_VAR.indexOf(currentStep);
-        if(idx > -1 && idx + 1 !== CONFIG_VAR.length) {
-            const step = CONFIG_VAR[idx + 1];
-            onStepChange(step)
-        }
-        if((idx + 1 ) === CONFIG_VAR.length) onActionBoxToggle();
 
-        const completedProgress: any = CONFIG_VAR.slice(0, idx  + 2);
-
-        setAllProgress(completedProgress)
-
-    };
-
-    let currentStepNumber = CONFIG_VAR.indexOf(currentStep) + 1;
+  let currentStepNumber = CONFIG_VAR.indexOf(currentStep) + 1;
 
   return (
     // create a way so we  don't have to speecify this color manually
@@ -51,9 +40,9 @@ export const OnboardingLayout:FC<any> = ({children , currentStep, onStepChange})
         </Box>
         <Text  mb={'12px'} mt={'24px'} fontWeight={600}  fontSize={'18px'} textTransform={'capitalize'} >{currentStep}</Text>
 
+
         {children}
 
-        <Button variant={'primary'} left={'10%'} mx={'auto'} w={'80%'} position={'absolute'} height={'54px'} bottom={'80px'}   onClick={handleStepChange} >Next</Button>
     </Box>
   )
-}
+};

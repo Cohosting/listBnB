@@ -1,17 +1,9 @@
-import { Box, Flex, Text } from '@chakra-ui/react'
 import React, { FC } from 'react';
-import { BiError } from 'react-icons/bi';
+import { Text } from '@chakra-ui/react'
+import { Error } from '../../components/Error';
 
 
-const  Error:FC<any> = ({children}) => {
-  return (
-    <Flex alignItems={'center'} color='#ff0033' mt={2}>
-      <BiError  style={{marginRight: '6px'}}  />
-      {children}
-    </Flex>
 
-  )
-}
 
 export const AuthError:FC<any> = ({ errorCode}) => {
 
