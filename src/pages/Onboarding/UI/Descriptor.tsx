@@ -17,7 +17,7 @@ export const Descriptor = () => {
   return (
     <>
       <Animate key='descriptor'>
-        <StepLabel />
+        <StepLabel label="Which of these best describes your place?" />
 
     <Box>
         {

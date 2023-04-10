@@ -11,13 +11,16 @@ export const getOrCreateUser = async  (firebaseUser, userCredentials  =  {}) => 
     const  ref = doc(db, 'users',  firebaseUser.uid);
     const snapshot = await getDoc(ref);
 
-    if(!snapshot.exists()) {
-        await setDoc(ref, {
-            ...userObject,
-            id: ref.id
-        })
-    }  else {
-        return  snapshot.data()
+    let tempUser = {
+      ...userObject,
+      id: ref.id,
+    };
+
+    if (!snapshot.exists()) {
+      await setDoc(ref, tempUser);
+      return tempUser;
+    } else {
+      return snapshot.data();
     }
 
 

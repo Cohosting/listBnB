@@ -7,7 +7,7 @@ import { BiTargetLock, BiMap } from 'react-icons/bi';
 let containerStyle = {
   bg: ' #FFFFFF',
   borderRadius: '10px',
-  padding: '10px 15px'
+  padding: '9px 15px'
 }
 
 export const LocationSuggestion: FC<any> = ({ onLocationClick }) => {
@@ -54,7 +54,7 @@ export const LocationSuggestion: FC<any> = ({ onLocationClick }) => {
       <Box><BiMap fontSize={'20px'} color={'#FE7146'} /></Box>
       <Box ml={'12px'} flex={1}>
         <Text fontSize={'13px'} color={'#848C9E'} fontWeight={500} lineHeight={'14px'} >Where</Text>
-        <Input value={searchText} onChange={(e) => {
+        <Input placeholder='Your address' value={searchText} onChange={(e) => {
           const val = e.target.value
           setSearchText(val);
           handleMapSearch(val)

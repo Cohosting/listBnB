@@ -59,7 +59,7 @@ export const Amenities = () => {
           <Image alt='illustration for selecting tone for AI' src={toneImage} />
         </Flex>
         <Text textAlign={'center'} fontWeight={700} fontSize={'20px'} lineHeight={'26px'} >Choose Your Tone that you want to <br /> generate result </Text>
-        <VStack padding={'24px'} spacing={'16px'} mt={'24px'} mb={'40px'} alignItems={'stretch'} >
+            <VStack padding={'24px'} spacing={'16px'} mt={'4px'} mb={'40px'} alignItems={'stretch'} >
           <SelectBox
             variant={'side'}
             label="Friendly"

@@ -15,8 +15,13 @@ import { AuthError } from './AuthError';
 import { useNavigate } from "react-router-dom";
 import { useToast } from '@chakra-ui/react';
 import { useOnboardingContext } from '../../context/onboardingContext';
+import { useAuthContext } from '../../context/authContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faPhone, faUser } from '@fortawesome/pro-regular-svg-icons';
 
 export const Signup:FC<any> = ({ onModeChanged, setCurrentStep}) => {
+
+    const { setCurrentUser, setIsUserPersist } = useAuthContext()
     const [error, setError] = useState<any>(null);
     const [isLoading, setIsLoading] = useState(false);
     const navigate =  useNavigate();
@@ -42,7 +47,7 @@ export const Signup:FC<any> = ({ onModeChanged, setCurrentStep}) => {
             ...userCredentials,
             [name]:   value
         })
-    }
+    };
 
 
   const handleSubmit = async (e:  any)  =>  {
@@ -52,7 +57,9 @@ export const Signup:FC<any> = ({ onModeChanged, setCurrentStep}) => {
       setIsLoading(true)
       try {
         const {user} =  await createUserWithEmailAndPassword(auth, email, password);
-        await getOrCreateUser(user, userCredentials);
+          const tempUser = await getOrCreateUser(user, userCredentials);
+          setCurrentUser(tempUser);
+          setIsUserPersist(true)
         toast({
             title: 'Account created.',
             description: "We've created your account for you.",
@@ -97,7 +104,7 @@ export const Signup:FC<any> = ({ onModeChanged, setCurrentStep}) => {
             <VStack spacing={'12px'} align={'stretch'} >
                 <AuthInput  
                     label="Email"
-                    rightIcon={<FaRegEnvelope fontSize={'20px'}  />  }
+                      rightIcon={<FontAwesomeIcon icon={faEnvelope} fontSize={'20px'} />}
                     inputProps={{
                         name: 'email',
                         value: email,
@@ -107,7 +114,7 @@ export const Signup:FC<any> = ({ onModeChanged, setCurrentStep}) => {
                 />
                  <AuthInput  
                     label="Full name"
-                    rightIcon={<AiOutlineUser fontSize={'20px'}  />  }
+                      rightIcon={<FontAwesomeIcon icon={faUser} fontSize={'20px'} />}
                     inputProps={{
                         name: 'fullName',
                         value: fullName,
@@ -127,7 +134,7 @@ export const Signup:FC<any> = ({ onModeChanged, setCurrentStep}) => {
                 />
                  <AuthInput  
                     label="Phone number"
-                    rightIcon={<FiPhoneCall fontSize={'20px'}  />  }
+                      rightIcon={<FontAwesomeIcon icon={faPhone} fontSize={'20px'} />}
                     inputProps={{
                         name: 'phoneNumber',
                         value: phoneNumber,
@@ -139,13 +146,13 @@ export const Signup:FC<any> = ({ onModeChanged, setCurrentStep}) => {
             </VStack>
 
            <Box my={'14px'} >
-            <Flex alignItems={'center'}>
+                  <Flex alignItems={'flex-start'} >
 
-                <Checkbox colorScheme={'orange'}  onChange={(e:   any) => setUserCredentials({
+                      <Checkbox mt={'5px'} colorScheme={'orange'} onChange={(e: any) => setUserCredentials({
                     ...userCredentials,
                     isAgreed: e.target.checked
-                })}   > 
-                <Text   ml={2} fontWeight={400} fontSize={'17px'}  color={'#848C9E'} >I Agree With The <Text as={'span'} color={'#FE7146;'} cursor={'pointer'} onClick={(e: any) =>  {
+                      })} />
+                      <Text ml={2} fontWeight={400} fontSize={'16px'} color={'#848C9E'} >I Agree With The <Text as={'span'} color={'#FE7146;'} cursor={'pointer'} onClick={(e: any) => {
                         e.stopPropagation()
                         {/* @ts-ignore */}
 navigate('/privacy-policy')
@@ -154,8 +161,7 @@ navigate('/privacy-policy')
                         <Text ml={1} as={'span'} color={'#FE7146'} cursor={'pointer'}  onClick={() =>  navigate('/terms-condition')} >
                              Term and Conditions.
                         </Text>
-                    </Text>
-                    </Checkbox>
+                      </Text>
             </Flex>
            </Box>
            <AuthError {...error} />

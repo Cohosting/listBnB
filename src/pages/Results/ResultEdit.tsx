@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Button, Flex, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, Text, Textarea, useToast } from '@chakra-ui/react';
 import { BackButton } from '../../components/BackButton';
 
@@ -10,9 +10,10 @@ interface ResultEditProps {
     label: string;
     subLabel: string;
     onSave:  (val: string, f: string) => Promise<void>;
+  value: string
 }
-export const ResultEdit:FC<ResultEditProps> = ({field, isOpen, onClose, label, subLabel, onSave}) => {
-  const [content, setContent] = useState<string>('');
+export const ResultEdit: FC<ResultEditProps> = ({ field, isOpen, onClose, label, subLabel, onSave, value }) => {
+  const [content, setContent] = useState<string>(value);
   const [isLoading, setIsLoading] = useState(false);
   const toast  =  useToast();
 
@@ -42,6 +43,8 @@ export const ResultEdit:FC<ResultEditProps> = ({field, isOpen, onClose, label, s
     });
   }
 
+
+
   return (
     <Modal  isOpen={isOpen} onClose={onClose} size={'full'} >
     <ModalContent  px={'20px'} pt={'14px'} > 
@@ -49,7 +52,7 @@ export const ResultEdit:FC<ResultEditProps> = ({field, isOpen, onClose, label, s
       <ModalBody p={0}>
         <Text sx={labelStyle} >{label}</Text>
         <Text sx={subLabelStyle}>{subLabel}</Text>
-        <Textarea onChange={(e) => setContent(e.target.value)} height={'500px'}  border={'1px solid #E3E6EE'} borderRadius={'8px'}  />
+          <Textarea value={content} onChange={(e) => setContent(e.target.value)} height={'500px'} border={'1px solid #E3E6EE'} borderRadius={'8px'} />
       </ModalBody>
       <ModalFooter alignItems={'stretch'} flexDir={'column'}>
         <Flex flex={1} alignItems={'center'} justifyContent={'center'} >

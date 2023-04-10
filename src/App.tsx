@@ -1,7 +1,7 @@
 import * as React from "react"
 import {
   ChakraProvider,
-  Box,
+
 } from "@chakra-ui/react"
 import { RouterProvider } from 'react-router-dom';
 import {router} from './router';
@@ -12,6 +12,7 @@ import '@fontsource/hind-vadodara/400.css';
 import '@fontsource/hind-vadodara/500.css';
 import '@fontsource/hind-vadodara/600.css';
 import '@fontsource/hind-vadodara/700.css'; 
+import './index.css'
 import { AuthContextComponent } from "./context/authContext";
 
 

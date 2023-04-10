@@ -14,9 +14,8 @@ export const MultipleSelectLayout:FC<any> = ({items,selectedItems, setSelectedIt
         setSelectedItems(newArr)
     
     };
-
   return (
-   <Box>
+    <Box pb={'160px'}>
       <SimpleGrid columns={2}  columnGap={'20px'} rowGap={'20px'} >
       {
             items.map((el: any) => (

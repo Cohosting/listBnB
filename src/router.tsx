@@ -3,7 +3,7 @@ import { createBrowserRouter }  from 'react-router-dom';
 import { ProtectedRoute } from './components/ProtectedRoutes';
 import { Login } from './pages/Auth/Login';
 import { Signup } from './pages/Auth/Signup';
-import { Dashboard } from './pages/dashboard';
+import { Dashboard } from './pages/Dashboard/dashboard';
 import { Homepage } from './pages/Index';
 import {Onboarding} from  './pages/Onboarding/Onboarding'
 import { PrivacyPolicy } from './pages/privacy-policy';
@@ -21,9 +21,9 @@ const router = createBrowserRouter([
 },
 {
     path: '/onboarding',
-    element: (<ProtectedRoute>
+    element: (
         <Onboarding />
-    </ProtectedRoute>)
+    )
 },
 {
     path: '/results/:id',

@@ -11,7 +11,7 @@ export const AuthInput:FC<any> = ({label, rightIcon = <FiChevronLeft /> ,inputPr
    border: '1px solid #DAE4FD',
     borderRadius: '8px',
     bg: '#FFFFFF',
-    padding: '12px 21px'
+    padding: '8px 21px'
   }
 
 

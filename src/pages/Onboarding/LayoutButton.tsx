@@ -10,8 +10,8 @@ export const LayoutButton: FC<any> = ({ validate, fieldsToLookUp }) => {
 
     const handleStepChange = () => {
         let shouldReturn = false
-        const errors = validate();
-        fieldsToLookUp.forEach((el: any) => {
+        const errors = validate ? validate() : {};
+        (fieldsToLookUp || []).forEach((el: any) => {
             if (errors[el]) shouldReturn = true
         });
 
@@ -28,7 +28,7 @@ export const LayoutButton: FC<any> = ({ validate, fieldsToLookUp }) => {
     };
 
     return (
-        <Button variant={'primary'} left={'10%'} mx={'auto'} w={'80%'} position={'absolute'} height={'54px'} bottom={'80px'} onClick={handleStepChange} >Next</Button>
+        <Button variant={'primary'} left={'10%'} mx={'auto'} w={'80%'} position={'absolute'} height={'54px'} bottom={'50px'} onClick={handleStepChange} >Next</Button>
 
     )
 }

@@ -6,14 +6,16 @@ import { OnboardingLayout } from './OnboardingLayout'
 import { ResultContainer } from './ResultContainer';
 import { Activities } from './UI/Activities';
 import { Amenities } from './UI/Amenities';
+import { Breakdown } from './UI/Breakdown';
 import { Descriptor } from './UI/Descriptor';
 import { Location } from './UI/Location';
 import { Property } from './UI/property';
 
 let stepObject: any = {
   locations: <Location />,
-  descriptor: <Descriptor />,
+  property_beds: <Breakdown />,
   property: <Property />,
+  descriptor: <Descriptor />,
   activities: <Activities />,
   amenities: <Amenities />,
 };
